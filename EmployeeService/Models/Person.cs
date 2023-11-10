@@ -6,7 +6,7 @@
         public string Firstname { get; set; } = null!;
         public string Surname { get; set; } = null!;
         public string? Patronymic { get; set; }
-        public DateOnly DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public Employee Employee { get; set; } = null!;
 

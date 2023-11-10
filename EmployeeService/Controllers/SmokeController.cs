@@ -1,10 +1,9 @@
+using Hackathon.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeService.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class SmokeController : ControllerBase
+    public class SmokeController : APIv1Conntroller
     {
         [HttpGet]
         public IActionResult Get()

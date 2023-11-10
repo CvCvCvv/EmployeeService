@@ -3,7 +3,7 @@
     public class Employee
     {
         public int Id { get; set; }
-        public DateOnly DateOfEmployment { get; set; }
+        public DateTime DateOfEmployment { get; set; }
         public double Tariff { get; set; }
 
         public int PersonId { get; set; }

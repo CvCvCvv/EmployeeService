@@ -1,11 +1,9 @@
-﻿namespace EmployeeService.Models
+﻿namespace EmployeeService.DTOs
 {
-    public class JobPost
+    public class JobPostDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public double SalaryIncrement { get; set; }
-
-        public List<Employee> Employees { get; set; } = new();
     }
 }
