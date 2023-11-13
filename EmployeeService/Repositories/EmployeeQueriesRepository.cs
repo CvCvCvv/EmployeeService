@@ -36,11 +36,11 @@ namespace EmployeeService.Repositories
                 case "fio":
                 default:
                     employees = employeeFilterDto.SortDescending ? employees.OrderByDescending(a => a.Person.Surname)
-                        .OrderByDescending(a => a.Person.Firstname)
-                        .OrderByDescending(a => a.Person.Patronymic) :
+                        .ThenByDescending(a => a.Person.Firstname)
+                        .ThenByDescending(a => a.Person.Patronymic) :
                         employees.OrderBy(a => a.Person.Surname)
-                        .OrderBy(a => a.Person.Firstname)
-                        .OrderBy(a => a.Person.Patronymic);
+                        .ThenBy(a => a.Person.Firstname)
+                        .ThenBy(a => a.Person.Patronymic);
                     break;
             }
 

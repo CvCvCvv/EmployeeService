@@ -22,6 +22,7 @@ namespace EmployeeService.Repositories
         public async Task DeleteEmployeeAsync(int id)
         {
             var employee = await _context.Employees.FindAsync(id);
+            _context.Persons.Remove(_context.Persons.Find(employee!.PersonId)!);
             _context.Employees.Remove(employee!);
             await _context.SaveChangesAsync();
         }
@@ -36,6 +37,7 @@ namespace EmployeeService.Repositories
             editedEmployee!.Person.Firstname = person.Firstname;
 
             editedEmployee.DateOfEmployment = employee.DateOfEmployment;
+            editedEmployee.Tariff = employee.Tariff;
             editedEmployee.JobPost = _context.JobPosts.Find(employee.JobPostId)!;
             editedEmployee.Department = _context.Departments.Find(employee.DepartmentId)!;
 

@@ -30,7 +30,8 @@ namespace EmployeeService.Queries
                     JobPostId = employee.JobPostId,
                     Patronymic = employee.Person.Patronymic,
                     Salary = employee.Tariff * employee.JobPost.SalaryIncrement,
-                    Surname = employee.Person.Surname
+                    Surname = employee.Person.Surname,
+                    Tariff = employee.Tariff
                 });
             }
             return allEmployeesDto;
@@ -51,7 +52,8 @@ namespace EmployeeService.Queries
                 JobPostId = employee.JobPostId,
                 Patronymic = employee.Person.Patronymic,
                 Salary = employee.Tariff * employee.JobPost.SalaryIncrement,
-                Surname = employee.Person.Surname
+                Surname = employee.Person.Surname,
+                Tariff = employee.Tariff
             };
 
             return employeeDto;
@@ -76,7 +78,8 @@ namespace EmployeeService.Queries
                     JobPostId = employee.JobPostId,
                     Patronymic = employee.Person.Patronymic,
                     Surname = employee.Person.Surname,
-                    Salary = employee.Tariff * employee.JobPost.SalaryIncrement
+                    Salary = employee.Tariff * employee.JobPost.SalaryIncrement,
+                    Tariff = employee.Tariff
                 });
             }
 
