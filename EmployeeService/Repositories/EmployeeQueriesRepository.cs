@@ -22,7 +22,7 @@ namespace EmployeeService.Repositories
             return employee!;
         }
 
-        public async Task<List<Employee>> GetFilteredAsync(EmployeeFilterDto employeeFilterDto)
+        public async Task<(List<Employee>, int)> GetFilteredAsync(EmployeeFilterDto employeeFilterDto)
         {
             IQueryable<Employee> employees = _context.Employees.Include(a => a.Person).Include(a => a.Department).Include(a => a.JobPost);
 
@@ -44,9 +44,11 @@ namespace EmployeeService.Repositories
                     break;
             }
 
-            employees = employees.Skip(employeeFilterDto.CountLoaded).Take(employeeFilterDto.CountLoading);
+            int countPages = await employees.CountAsync();
+            countPages = (int)Math.Ceiling((double)(countPages / (double)employeeFilterDto.CountLoading));
+            employees = employees.Skip((employeeFilterDto.Page) * employeeFilterDto.CountLoading).Take(employeeFilterDto.CountLoading);
 
-            return await employees.ToListAsync();
+            return (await employees.ToListAsync(), countPages);
         }
 
         public bool IsExistsId(int id)

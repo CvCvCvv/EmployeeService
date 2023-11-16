@@ -12,6 +12,6 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\build</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\components\About\" />
+    <Folder Include="src\png\" />
   </ItemGroup>
 </Project>

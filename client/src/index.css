@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.filter-background {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}

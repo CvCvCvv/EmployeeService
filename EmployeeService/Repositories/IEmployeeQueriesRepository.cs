@@ -8,6 +8,6 @@ namespace EmployeeService.Repositories
         public Task<Employee> GetByIdAsync(int id);
         public bool IsExistsId(int id);
         public Task<List<Employee>> GetAllAsync();
-        public Task<List<Employee>> GetFilteredAsync(EmployeeFilterDto employeeFilterDto);
+        public Task<(List<Employee>, int)> GetFilteredAsync(EmployeeFilterDto employeeFilterDto);
     }
 }

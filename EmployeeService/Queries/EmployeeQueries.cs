@@ -59,9 +59,9 @@ namespace EmployeeService.Queries
             return employeeDto;
         }
 
-        public async Task<List<EmployeeDto>> GetFilteredEmployeeAsync(EmployeeFilterDto employeeFilterDto)
+        public async Task<EmployeeFilteredDto> GetFilteredEmployeeAsync(EmployeeFilterDto employeeFilterDto)
         {
-            List<Employee> employees = await _employeeQueriesRepository.GetFilteredAsync(employeeFilterDto);
+            (List<Employee> employees, int countPages) = await _employeeQueriesRepository.GetFilteredAsync(employeeFilterDto);
             List<EmployeeDto> employeeDtos = new List<EmployeeDto>();
 
             foreach (var employee in employees)
@@ -83,7 +83,7 @@ namespace EmployeeService.Queries
                 });
             }
 
-            return employeeDtos;
+            return new EmployeeFilteredDto() { employees = employeeDtos, Pages = countPages};
 
         }
 

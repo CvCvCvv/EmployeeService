@@ -1,4 +1,4 @@
-﻿import axios from 'axios';
+import axios from 'axios';
 const React = require('react');
 
 
@@ -23,6 +23,7 @@ export default class FormEmployee extends React.Component {
 
             .catch(function (error) {
                 console.log(error);
+                //this.props.showError(error);
             });
 
         axios.get(`${this.props.apiUrl}/api/v1/JobPost/getall`)
@@ -32,6 +33,7 @@ export default class FormEmployee extends React.Component {
 
             .catch(function (error) {
                 console.log(error);
+                //this.props.showError(error);
             });
     }
 
@@ -39,28 +41,28 @@ export default class FormEmployee extends React.Component {
         return <form method="post" onSubmit={this.props.saveClick}>
        
             <div className="form-floating mb-3">
-                <input type="text" className="form-control" name="firstname" id="floatingFirstname" placeholder="Имя" required />
+                <input type="text" className="form-control" maxLength="40" name="firstname" id="floatingFirstname" placeholder="Имя" required />
                 <label htmlFor="floatingFirstname">Имя</label>
             </div>
 
             <div className="form-floating mb-3">
-                <input type="text" className="form-control" name="surname" id="floatingsurname" placeholder="Фамилия" required />
+                <input type="text" className="form-control" maxLength="40" name="surname" id="floatingsurname" placeholder="Фамилия" required />
                 <label htmlFor="floatingsurname">Фамилия</label>
             </div>
 
             <div className="form-floating mb-3">
-                <input type="text" className="form-control" name="patronymic" id="flatingpatronymic" placeholder="Отчество" />
+                <input type="text" className="form-control" maxLength="40" name="patronymic" id="flatingpatronymic" placeholder="Отчество" />
                 <label htmlFor="flatingpatronymic">Отчество</label>
             </div>
 
             <label htmlFor="dateOfBirdth  mb-3">Дата рождения</label>
-            <input id="dateOfBirdth mb-3" name="dateOfBirth" className="form-control" type="date" required />
+            <input id="dateOfBirdth mb-3" max={new Date().toISOString().split("T")[0]} name="dateOfBirth" className="form-control" type="date" required />
 
             <label htmlFor="dateOfEmployment mb-3">Дата начала работы</label>
-            <input id="dateOfEmployment  mb-3 px-3" name="dateOfEmployment" className="form-control" type="date" />
+            <input id="dateOfEmployment  mb-3 px-3" max={new Date().toISOString().split("T")[0]} name="dateOfEmployment" className="form-control" type="date" />
 
             <div className="form-floating mb-3 my-3">
-                <input type="number" min="1" className="form-control" name="tariff" id="tariff" placeholder="Ставка" required />
+                <input type="number" min="1" max="999999999" className="form-control" name="tariff" id="tariff" placeholder="Ставка" required />
                 <label htmlFor="tariff">Ставка</label>
             </div>
 

@@ -21,7 +21,10 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<EmployeeCreateDtoValidator>();
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddScoped<IDepartmentCommandsRepository, DepartmentCommandsRepository>();
 builder.Services.AddScoped<IDepartmentQueriesRepository, DepartmentQueriesRepository>();
@@ -36,12 +39,14 @@ builder.Services.AddScoped<IDepartmentQueries, DepartmentQueries>();
 builder.Services.AddScoped<IJobPostCommands, JobPostCommands>();
 builder.Services.AddScoped<IJobPostQueries, JobPostQueries>();
 
+string clientUrl = builder.Configuration.GetValue<string>("clientApi");
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "MyAllowSpecificOrigins",
                         policy =>
                         {
-                            policy.WithOrigins("http://localhost:3000")
+                            policy.WithOrigins(clientUrl)
                             .AllowAnyMethod()
                             .AllowAnyHeader()
                             .AllowCredentials();
@@ -56,6 +61,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    if (context.Database.GetPendingMigrations().Any())
+    {
+        context.Database.Migrate();
+    }
+}
+
 app.UseCors("MyAllowSpecificOrigins");
 
 app.UseAuthorization();

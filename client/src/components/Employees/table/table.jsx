@@ -1,4 +1,4 @@
-﻿
+
 const React = require('react');
 
 
@@ -10,7 +10,7 @@ export default class Table extends React.Component {
     render() {
         let employees = this.props.employees;
 
-        return <div className="my-2 mx-auto p-3 block-content overflow-scroll">
+        return <div className="my-2 mx-auto p-3 block-content overflow-auto">
             < table className="table" >
                 <thead>
                     <tr>
@@ -45,9 +45,9 @@ class StringTable extends React.Component {
         return <tr>
             <td >{items.department}</td>
             <td>{items.surname + " " + items.firstname + " " + (items.patronymic != null ? items.patronymic : "")}</td>
-            <td>{items.dateOfBirth}</td>
+            <td>{items.dateOfBirth.split('T')[0]}</td>
             <td>{items.jobPost}</td>
-            <td>{items.dateOfEmployment}</td>
+            <td>{items.dateOfEmployment.split('T')[0]}</td>
             <td>{items.salary}</td>
             <td >
                 <div className="d-flex">

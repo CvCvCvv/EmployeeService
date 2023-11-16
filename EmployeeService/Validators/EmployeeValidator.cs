@@ -52,7 +52,7 @@ namespace EmployeeService.Validators
         public EmployeeFilterDtoValidator(IJobPostQueries jobPostQueries)
         {
             RuleFor(a => a.JobPostId).Must(input => input == 0 || jobPostQueries.IsExistsId(input)).WithMessage("выбранной должности не существует");
-            RuleFor(a => a.CountLoaded).Must(input => input >= 0).WithMessage("количество загруженных элементов не может быть меньше ноля");
+            RuleFor(a => a.Page).Must(input => input >= 0).WithMessage("страница не может быть меньше ноля");
             RuleFor(a => a.CountLoading).Must(input => input > 0 && input <= 40).WithMessage("число загружаемых элементов вышло за допустимые пределы");
         }
     }
